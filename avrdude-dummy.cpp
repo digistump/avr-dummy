@@ -7,7 +7,7 @@ using namespace std;
 int main(int argc,char* argv[])
 {
     std::string hexPrefix("-Uflash:w:");
-    std::string platformPrefix("-p");
+    std::string platformPrefix("-c");
     std::string argument;
     std::string hexValue; 
     std::string platformValue; 
