@@ -47,7 +47,7 @@ int main(int argc,char* argv[])
         cout << "Running Digispark Uploader..." << endl;
 
         //replace the rest of this with the uploader
-        std::string uploader = original.substr(0,found+1)+"micronucleus "+hexValue; 
+        std::string uploader = "\""+original.substr(0,found+1)+"micronucleus\" "+hexValue; 
 
         //cout << uploader << endl;
         cout << "Plug in device now..." << endl;
