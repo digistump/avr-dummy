@@ -4,17 +4,27 @@
 #include <stdio.h>
 using namespace std;
 
+
+void replace(std::string& target, const std::string oldstr, const std::string newstr) {
+    unsigned int x;
+    while(x = target.find(oldstr), x != std::string::npos) {
+        target.erase(x, oldstr.length());
+        target.insert(x, newstr);
+    }
+}
+
 int main(int argc,char* argv[])
 {
     std::string hexPrefix("-Uflash:w:");
     std::string platformPrefix("-c");
+    std::string configPrefix("-C");
     std::string argument;
     std::string hexValue; 
     std::string platformValue; 
     std::string original = argv[0];
     size_t found;
     found=original.find_last_of("/\\");
-    std::string command = original.substr(0,found+1) + "avrdude_original";
+    std::string command = "\""+original.substr(0,found+1) + "avrdude_original" + "\"";
 
 
 
@@ -37,7 +47,16 @@ int main(int argc,char* argv[])
             //cout << platformValue << endl;
         }
 
-        command += " "+argument;
+
+        if(argument.substr(0, configPrefix.size()) == configPrefix) { 
+            // found platform ... 
+
+            command += " -C\""+argument.substr(configPrefix.size())+"\"";
+            //cout << platformValue << endl;
+        }
+        else{
+            command += " "+argument;
+        }
 
     }
 
@@ -58,6 +77,7 @@ int main(int argc,char* argv[])
         
 
         //cout << command << endl;
+        command = "\""+command+"\"";
         system(command.c_str());
     }
 }
