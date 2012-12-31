@@ -5,14 +5,6 @@
 using namespace std;
 
 
-void replace(std::string& target, const std::string oldstr, const std::string newstr) {
-    unsigned int x;
-    while(x = target.find(oldstr), x != std::string::npos) {
-        target.erase(x, oldstr.length());
-        target.insert(x, newstr);
-    }
-}
-
 int main(int argc,char* argv[])
 {
     std::string hexPrefix("-Uflash:w:");
@@ -76,8 +68,10 @@ int main(int argc,char* argv[])
         cout << "Running AVRDUDE..." << endl;
         
 
-        //cout << command << endl;
+        #ifdef _WIN32
         command = "\""+command+"\"";
+        #endif
+        //cout << command << endl;
         system(command.c_str());
     }
 }
