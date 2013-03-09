@@ -58,10 +58,10 @@ int main(int argc,char* argv[])
         cout << "Running Digispark Uploader..." << endl;
 
         //replace the rest of this with the uploader
-        std::string uploader = "\""+original.substr(0,found+1)+"micronucleus\" "+hexValue; 
+        std::string uploader = "\""+original.substr(0,found+1)+"micronucleus\" --timeout 60 --run --no-ansi "+hexValue; 
 
         //cout << uploader << endl;
-        cout << "Plug in device now..." << endl;
+        cout << "Plug in device now... (will timeout in 60 seconds)" << endl;
         system(uploader.c_str());
     }
     else{
